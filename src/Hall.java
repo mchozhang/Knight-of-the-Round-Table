@@ -2,17 +2,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * imitate the Great Hall having meeting, encapsulate events and its causal result such as
+ * the king enter, the knight sits down and the meeting begins and so forth.
  * @author Wenhao Zhang 970012
  */
 
 public class Hall {
-    private String name;
     private Agenda newAgenda;
     private Agenda completeAgenda;
 
     // the mapping of knights that are in the hall and whether they have sat down.
-    // <K, V> = <knight, isSatDown>
+    // Key: the Knight object,
+    // Value: Boolean of is the knight sitting down
     private Map<Knight, Boolean> knightMap;
 
     // whether the king is in the hall
@@ -21,8 +22,7 @@ public class Hall {
     // whether the meeting is ongoing
     private boolean isMeetingBegan;
 
-    public Hall(String name, Agenda newAgenda, Agenda completeAgenda) {
-        this.name = name;
+    public Hall(Agenda newAgenda, Agenda completeAgenda) {
         this.newAgenda = newAgenda;
         this.completeAgenda = completeAgenda;
         isKingIn = false;
@@ -67,6 +67,8 @@ public class Hall {
             isMeetingBegan = true;
             System.out.println("Meeting begins!");
         }
+
+        // wake up the threads that are waiting for the lock
         notifyAll();
     }
 
@@ -83,6 +85,8 @@ public class Hall {
             isMeetingBegan = false;
             System.out.println("Meeting ends!");
         }
+
+        // wake up the threads that are waiting for the lock
         notifyAll();
     }
 

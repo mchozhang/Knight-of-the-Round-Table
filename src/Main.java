@@ -16,7 +16,7 @@ public class Main {
         // generate the hall and quest agendas
         Agenda agendaNew = new Agenda("New Agenda");
         Agenda agendaComplete = new Agenda("Complete Agenda");
-        Hall greatHall = new Hall("Great Hall", agendaNew, agendaComplete);
+        Hall greatHall = new Hall(agendaNew, agendaComplete);
 
         // generate the producer, consumer and king arthur processes
         Producer producer = new Producer(agendaNew);

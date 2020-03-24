@@ -1,4 +1,7 @@
 /**
+ * Imitation of the Knight by encapsulating its high level actions
+ * which should be run as a cycle in a loop.
+ *
  * @author Wenhao Zhang 970012
  */
 
@@ -18,15 +21,21 @@ public class Knight extends Thread {
         this.quest = null;
     }
 
+    /**
+     * actions of the knight should be run as a cycle in a loop
+     */
     public void run() {
         while (!isInterrupted()) {
             entersHall();
+            mingling();
             sitsDown();
             releaseQuest();
             acquireQuest();
             standUp();
+            mingling();
             exitFromHall();
             setOffToQuest();
+            completingQuest();
             completeQuest();
         }
     }
@@ -38,6 +47,16 @@ public class Knight extends Thread {
         try {
             hall.knightEnters(this);
             System.out.println(String.format("%s enters the hall.", this.toString()));
+        } catch (InterruptedException e) {
+            this.interrupt();
+        }
+    }
+
+    /**
+     * imitate the knight mingling with each other before sitting down or after standing up at the meeting
+     */
+    private void mingling() {
+        try {
             sleep(Params.getMinglingTime());
         } catch (InterruptedException e) {
             this.interrupt();
@@ -82,15 +101,8 @@ public class Knight extends Thread {
      * stand up on the meeting
      */
     private void standUp() {
-        try {
-            System.out.println(String.format("%s stands up", this.toString()));
-            hall.knightStandsUp(this);
-
-            // mingling after standing up
-            sleep(Params.getMinglingTime());
-        } catch (InterruptedException e) {
-            this.interrupt();
-        }
+        System.out.println(String.format("%s stands up", this.toString()));
+        hall.knightStandsUp(this);
     }
 
     /**
@@ -109,11 +121,15 @@ public class Knight extends Thread {
      * set off to complete the quest
      */
     private void setOffToQuest() {
+        System.out.println(String.format("%s sets of to complete %s.", this.toString(), this.quest.toString()));
+    }
+
+    /**
+     * imitate the quest is ongoing
+     */
+    private void completingQuest() {
         try {
-            if (this.quest != null) {
-                System.out.println(String.format("%s sets of to complete %s.", this.toString(), this.quest.toString()));
-                sleep(Params.getQuestingTime());
-            }
+            sleep(Params.getQuestingTime());
         } catch (InterruptedException e) {
             this.interrupt();
         }
@@ -123,9 +139,7 @@ public class Knight extends Thread {
      * the knight complete the current quest
      */
     private void completeQuest() {
-        if (this.quest != null) {
-            System.out.println(String.format("%s completes %s.", this.toString(), this.quest.toString()));
-        }
+        System.out.println(String.format("%s completes %s.", this.toString(), this.quest.toString()));
     }
 
     @Override

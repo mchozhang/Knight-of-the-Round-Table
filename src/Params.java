@@ -1,12 +1,12 @@
+import java.util.Random;
+import java.lang.Math;
+
 /**
  * Parameters for the questing knights simulator.
  *
  * @author Wenhao Zhang 970012
- *
  */
 
-import java.util.Random;
-import java.lang.Math;
 
 class Params {
 	

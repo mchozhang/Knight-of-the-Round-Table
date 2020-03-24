@@ -1,10 +1,10 @@
 import java.util.*;
 
 /**
+ * Stores the newly created quest to be assigned or completed quests
  *
  * @author Wenhao Zhang 970012
  */
-
 
 public class Agenda {
 
@@ -25,6 +25,8 @@ public class Agenda {
     public synchronized void addNew(Quest quest) {
         this.quests.add(quest);
         System.out.println(String.format("%s is added to %s.", quest, this.name));
+
+        // wake the knight threads that are waiting for a new quest
         notifyAll();
     }
 
@@ -37,6 +39,8 @@ public class Agenda {
         while (this.quests.isEmpty()) {
             wait();
         }
+
+        // assign the first quest in the agenda to a knight, and remove it from the queue
         return this.quests.poll();
     }
 
