@@ -68,6 +68,8 @@ public class Hall {
 
     /**
      * A knight sits down
+     *
+     * @param knight the knight wants to sit down
      */
     public synchronized void knightSitsDown(Knight knight) {
         System.out.println(String.format("%s sits at the Round Table.", knight.toString()));
@@ -80,6 +82,8 @@ public class Hall {
 
     /**
      * A knight stands up
+     *
+     * @param knight the knight wants to stand up
      */
     public synchronized void knightStandsUp(Knight knight) {
         System.out.println(String.format("%s stands up", knight.toString()));
@@ -110,6 +114,7 @@ public class Hall {
     /**
      * assign a new quest to a knight
      *
+     * @param knight the knight acquiring the quest
      * @return new quest in the new agenda
      */
     public synchronized Quest knightAcquiresQuest(Knight knight) throws InterruptedException {

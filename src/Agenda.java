@@ -9,7 +9,7 @@ import java.util.*;
 public class Agenda {
 
     // an FIFO queue structure to store the quests of the agenda
-    private  Queue<Quest> quests;
+    private Queue<Quest> quests;
 
     // name of the agenda
     private String name;
@@ -21,6 +21,8 @@ public class Agenda {
 
     /**
      * add a quest to the agenda
+     *
+     * @param quest the quest produced by producer
      */
     public synchronized void addNew(Quest quest) {
         this.quests.add(quest);
@@ -47,6 +49,8 @@ public class Agenda {
 
     /**
      * add a quest to the complete agenda
+     *
+     * @param quest the completed quest
      */
     public synchronized void addCompleted(Quest quest) {
         this.quests.add(quest);
