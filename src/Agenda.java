@@ -9,7 +9,7 @@ import java.util.*;
 public class Agenda {
 
     // an FIFO queue structure to store the quests of the agenda
-    private Queue<Quest> quests;
+    private  Queue<Quest> quests;
 
     // name of the agenda
     private String name;
@@ -20,7 +20,7 @@ public class Agenda {
     }
 
     /**
-     *  add a quest to the agenda
+     * add a quest to the agenda
      */
     public synchronized void addNew(Quest quest) {
         this.quests.add(quest);
@@ -32,6 +32,7 @@ public class Agenda {
 
     /**
      * assign the first quest to a knight
+     *
      * @return first quest of the queue
      */
     public synchronized Quest assignQuest() throws InterruptedException {
@@ -42,6 +43,16 @@ public class Agenda {
 
         // assign the first quest in the agenda to a knight, and remove it from the queue
         return this.quests.poll();
+    }
+
+    /**
+     * add a quest to the complete agenda
+     */
+    public synchronized void addCompleted(Quest quest) {
+        this.quests.add(quest);
+
+        // wake the consumer waiting for a completed quest
+        notifyAll();
     }
 
     /**

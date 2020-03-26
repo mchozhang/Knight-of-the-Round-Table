@@ -17,8 +17,9 @@ public class KingArthur extends Thread {
      */
     public void run() {
         while (!isInterrupted()) {
-            waitingForNextMeeting();
-            entersHall();
+            enterHall();
+            startMeeting();
+            endMeeting();
             exitFromHall();
         }
     }
@@ -26,9 +27,37 @@ public class KingArthur extends Thread {
     /**
      * king enters the great hall
      */
-    public void entersHall() {
-        System.out.println("King Arthur enters the Great Hall.");
-        hall.kingEnters();
+    public void enterHall() {
+        try {
+            // imitate the king waiting outside of the hall
+            sleep(Params.getKingWaitingTime());
+
+            hall.kingEnters();
+        } catch (InterruptedException e) {
+            this.interrupt();
+        }
+    }
+
+    /**
+     * try to start the meeting
+     */
+    public void startMeeting() {
+        try {
+            hall.startMeeting();
+        } catch (InterruptedException e) {
+            this.interrupt();
+        }
+    }
+
+    /**
+     * try to end the meeting
+     */
+    public void endMeeting() {
+        try {
+            hall.endMeeting();
+        } catch (InterruptedException e) {
+            this.interrupt();
+        }
     }
 
     /**
@@ -37,18 +66,6 @@ public class KingArthur extends Thread {
     public void exitFromHall() {
         try {
             hall.kingExits();
-            System.out.println("King Arthur exits from the Great Hall.");
-        } catch (InterruptedException e) {
-            this.interrupt();
-        }
-    }
-
-    /**
-     * imitate the king is outside of the hall waiting for the next meeting
-     */
-    public void waitingForNextMeeting() {
-        try {
-            sleep(Params.getKingWaitingTime());
         } catch (InterruptedException e) {
             this.interrupt();
         }
