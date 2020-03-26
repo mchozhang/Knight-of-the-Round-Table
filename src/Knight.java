@@ -11,9 +11,16 @@ public class Knight extends Thread {
      * all possible status of a knight
      */
     public enum Status {
+        // completing a quest
         Questing,
+
+        // mingling before the meeting
         MinglingBeforeMeeting,
+
+        // sitting at the table, either waiting for or having a meeting
         Sitting,
+
+        // standing and mingling after the meeting
         Standing
     }
 
@@ -29,6 +36,12 @@ public class Knight extends Thread {
     // status of the knight
     public Status status;
 
+    /**
+     * create a Knight instances with an id and hall object
+     *
+     * @param id   knight's id
+     * @param hall the great hall
+     */
     public Knight(int id, Hall hall) {
         this.id = id;
         this.hall = hall;
@@ -142,6 +155,11 @@ public class Knight extends Thread {
         }
     }
 
+    /**
+     * produce an identity string for the knight
+     *
+     * @return string result
+     */
     @Override
     public String toString() {
         return "Knight " + id;

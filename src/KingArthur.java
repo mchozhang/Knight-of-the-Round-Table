@@ -8,6 +8,10 @@ public class KingArthur extends Thread {
     // the great hall
     private Hall hall;
 
+    /**
+     * constructor of the King
+     * @param hall the great hall
+     */
     public KingArthur(Hall hall) {
         this.hall = hall;
     }
