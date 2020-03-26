@@ -177,11 +177,6 @@ public class Hall {
      * the king exit from the hall
      */
     public synchronized void kingExits() throws InterruptedException {
-        // wait until all knights have stood up
-        while (!haveAllKnightsStoodUp()) {
-            wait();
-        }
-
         // update hall's status
         isKingIn = false;
         System.out.println("King Arthur exits from the Great Hall.");

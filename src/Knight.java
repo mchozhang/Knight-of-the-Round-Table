@@ -41,8 +41,8 @@ public class Knight extends Thread {
      */
     public void run() {
         while (!isInterrupted()) {
-            entersHall();
-            sitsDown();
+            enterHall();
+            sitDown();
             releaseQuest();
             acquireQuest();
             standUp();
@@ -54,7 +54,7 @@ public class Knight extends Thread {
     /**
      * the knight enters the hall
      */
-    private void entersHall() {
+    private void enterHall() {
         try {
             hall.knightEnters(this);
 
@@ -69,7 +69,7 @@ public class Knight extends Thread {
     /**
      * sits down on the meeting
      */
-    private void sitsDown() {
+    private void sitDown() {
         status = Status.Sitting;
         hall.knightSitsDown(this);
     }
